@@ -1,0 +1,40 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="ng-foobar.css" />
+    <script type="text/javascript" src="ng-foobar.js"></script>
+  </head>
+  <body>
+    <h1>ng-foobar demo</h1>
+    <button type="button" id="btn-success">Success Message</button>
+    <button type="button" id="btn-info">Info Message</button>
+    <button type="button" id="btn-warning">Warning Message</button>
+    <button type="button" id="btn-error">Error Message</button>
+
+    <script>
+      document.getElementById('btn-success').addEventListener('click', successMessage);
+      document.getElementById('btn-info').addEventListener('click', infoMessage);
+      document.getElementById('btn-warning').addEventListener('click', warningMessage);
+      document.getElementById('btn-error').addEventListener('click', errorMessage);
+
+      function successMessage() {
+        ngFoobar.showMessage('success', 'Success message goes here');
+      }
+      function infoMessage() {
+        ngFoobar.showMessage('info', 'Info message goes here');
+      }
+      function warningMessage() {
+        ngFoobar.showMessage('warning', 'Warning message goes here');
+      }
+      function errorMessage() {
+        ngFoobar.showMessage('error', 'Error message goes here');
+      }
+
+    </script>
+  </body>
+</html>

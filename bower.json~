@@ -1,0 +1,22 @@
+{
+  "name": "ng-foobar",
+  "version": "0.0.1",
+  "authors": [
+    "Jonathan Welzel <jnwelzel@gmail.com>"
+  ],
+  "description": "Notification bar that slides down.",
+  "keywords": [
+    "notifications",
+    "flash",
+    "message"
+  ],
+  "license": "MIT",
+  "homepage": "foobar.jonwelzel.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
