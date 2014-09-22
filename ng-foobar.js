@@ -16,26 +16,43 @@
 
   ngFoobar.version = '0.0.1';
 
-  ngFoobar.contexts = ['success', 'info', 'error', 'warning'];
+  ngFoobar.success = {
+    color: '#3C763D',
+    backgroud: '#DFF0D8',
+    border: '#D6E9C6'
+  };
+
+  ngFoobar.warning = {
+    color: '#C09853',
+    backgroud: '#FCF8E3',
+    border: '#FBEED5'
+  };
+
+  ngFoobar.info = {
+    color: '#1E90FF',
+    backgroud: '#FFF',
+    border: '#EBEBEB'
+  };
+
+  ngFoobar.error = {
+    color: '#B94A48',
+    backgroud: '#F2DEDE',
+    border: '#EED3D7'
+  };
+
+  ngFoobar.colors = [];
+  ngFoobar.colors['success'] = ngFoobar.success;
+  ngFoobar.colors['warning'] = ngFoobar.warning;
+  ngFoobar.colors['info'] = ngFoobar.info;
+  ngFoobar.colors['error'] = ngFoobar.error;
+
+  var Colors = ngFoobar.colors;
 
   var Settings = ngFoobar.settings = {
-    successColor: '#3C763D',
-    successBgColor: '#DFF0D8',
-    successBorderColor: '#D6E9C6',
-    warningColor: '#C09853',
-    warningBgColor: '#FCF8E3',
-    warningBorderColor: '#FBEED5',
-    infoColor: '#1E90FF',
-    infoBgColor: '#FFF',
-    infoBorderColor: '#EBEBEB',
-    errorColor: '#B94A48',
-    errorBgColor: '#F2DEDE',
-    errorBorderColor: '#EED3D7',
     autoClose: true,
     displayTime: 3,
     barSelector: '[role="bar"]',
-    parent: 'body',
-    template: '<div class="ng-foobar" role="bar"></div>'
+    template: '<div class="bar" role="bar"><div class="message">%message%</div></div>'
   };
 
   /**
@@ -55,42 +72,48 @@
     return this;
   };
 
-  ngFoobar.showMessage = function(context, message) {
-    console.log('%s %s', context, message);
-
-  };
-
   /**
-   * (Internal) renders the progress bar markup based on the `template`
+   * (Internal) renders the message bar markup based on the `template`
    * setting.
    */
 
-  ngFoobar.render = function(context, message) {
-    if (ngFoobar.isRendered()) return document.getElementById('ng-foobar');
-
-    var messageDiv = document.createElement('div');
-    messageDiv.innerHTML = message;
-
+  ngFoobar.showMessage = function(context, message) {
+    if (ngFoobar.isRendered()) {
+      removeElement(document.getElementById('ng-foobar'));
+    }
     var foobarDiv = document.createElement('div');
     foobarDiv.id = 'ng-foobar';
-    foobarDiv.innerHTML = Settings.template;
-    foobarDiv.appendChild(messageDiv);
+    foobarDiv.addEventListener('click', ngFoobar.hideMessage);
+    foobarDiv.addEventListener('transitionend', afterTransition);
+
+    foobarDiv.innerHTML = Settings.template.replace('%message%', message);
 
     var bar      = foobarDiv.querySelector(Settings.barSelector),
-        parent   = document.querySelector(Settings.parent);
+        parent   = document.body;
 
     css(bar, {
-      transition: 'all 0 linear',
-      transform: 'translate3d(' + perc + '%,0,0)'
+      color: Colors[context].color,
+      background: Colors[context].backgroud,
+      'border-bottom': '1px solid ' + Colors[context].border
     });
 
-    if (parent != document.body) {
-      addClass(parent, 'ng-foobar-custom-parent');
-    }
+    parent.appendChild(foobarDiv);
+    foobarDiv.style.opacity = 0;
+    window.getComputedStyle(foobarDiv).opacity;
+    foobarDiv.style.opacity = 0.95;
 
-    parent.appendChild(foobar);
     return foobarDiv;
   };
+
+  ngFoobar.hideMessage = function() {
+    document.getElementById('ng-foobar').style.opacity = 0;
+  };
+
+  function afterTransition() {
+    if (ngFoobar.isRendered() && window.getComputedStyle(document.getElementById('ng-foobar')).opacity == 0) {
+      removeElement(document.getElementById('ng-foobar'));
+    }
+  }
 
   /**
    * Checks if the progress bar is rendered.
@@ -158,56 +181,6 @@
       }
     }
   })();
-
-  /**
-   * (Internal) Determines if an element or space separated list of class names contains a class name.
-   */
-
-  function hasClass(element, name) {
-    var list = typeof element == 'string' ? element : classList(element);
-    return list.indexOf(' ' + name + ' ') >= 0;
-  }
-
-  /**
-   * (Internal) Adds a class to an element.
-   */
-
-  function addClass(element, name) {
-    var oldList = classList(element),
-        newList = oldList + name;
-
-    if (hasClass(oldList, name)) return;
-
-    // Trim the opening space.
-    element.className = newList.substring(1);
-  }
-
-  /**
-   * (Internal) Removes a class from an element.
-   */
-
-  function removeClass(element, name) {
-    var oldList = classList(element),
-        newList;
-
-    if (!hasClass(element, name)) return;
-
-    // Replace the class name.
-    newList = oldList.replace(' ' + name + ' ', ' ');
-
-    // Trim the opening and closing spaces.
-    element.className = newList.substring(1, newList.length - 1);
-  }
-
-  /**
-   * (Internal) Gets a space separated list of the class names on the element.
-   * The list is wrapped with a single space on each end to facilitate finding
-   * matches within the list.
-   */
-
-  function classList(element) {
-    return (' ' + (element.className || '') + ' ').replace(/\s+/gi, ' ');
-  }
 
   /**
    * (Internal) Removes an element from the DOM.
