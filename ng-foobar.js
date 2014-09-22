@@ -54,10 +54,6 @@ angular.module('ngFoobar.directive', [])
 
     /**
      * Updates configuration.
-     *
-     *     ngFoobar.configure({
-     *       minimum: 0.1
-     *     });
      */
     ngFoobar.configure = function(options) {
       var key, value;
@@ -113,7 +109,7 @@ angular.module('ngFoobar.directive', [])
     }
 
     /**
-     * Checks if the progress bar is rendered.
+     * Checks if the message bar is rendered.
      */
 
     ngFoobar.isRendered = function() {
