@@ -11,7 +11,8 @@
     "message"
   ],
   "license": "MIT",
-  "homepage": "foobar.jonwelzel.com",
+  "main": ["ng-foobar.js", "ng-foobar.css"],
+  "homepage": "jonwelzel.com/foobar",
   "scripts": [
     "ng-foobar.js"
   ],
