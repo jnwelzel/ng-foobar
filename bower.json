@@ -1,6 +1,6 @@
 {
   "name": "ng-foobar",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "authors": [
     "Jonathan Welzel <jnwelzel@gmail.com>"
   ],
@@ -12,7 +12,7 @@
   ],
   "license": "MIT",
   "main": ["ng-foobar.js", "ng-foobar.css"],
-  "homepage": "jonwelzel.com/foobar",
+  "homepage": "ng-foobar.herokuapp.com",
   "scripts": [
     "ng-foobar.js"
   ],
