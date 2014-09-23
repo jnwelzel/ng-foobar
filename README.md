@@ -33,3 +33,6 @@ Use with the API down below.
 ```javascript
 ngFoobar.show(context, message);
 ```
+
+#Demo
+A working demo can be found at [http://ng-foobar.herokuapp.com/](http://ng-foobar.herokuapp.com/)
