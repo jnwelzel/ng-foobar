@@ -4,7 +4,6 @@
 angular.module('ngFoobar.provider', ['ngFoobar.directive'])
   .provider('ngFoobar', function () {
     'use strict';
-    this.version = '0.0.1';
 
     this.success = {
       color: '#3C763D',
@@ -48,18 +47,9 @@ angular.module('ngFoobar.provider', ['ngFoobar.directive'])
         };
         var ngFoobarEl = $compile('<ng-foobar></ng-foobar>')($scope);
         $body.append(ngFoobarEl);
-        var animation;
-        var animate = function(fn, time) {
-          if(animation) { $timeout.cancel(animation); }
-          animation = $timeout(fn, time);
-        };
 
         var hide = function () {
-          ngFoobarEl.css('opacity', '0');
-          var self = this;
-          animate(function () {
-            ngFoobarEl.css('width', '0%');
-          }, 400);
+          ngFoobarEl.css('top', '-50px');
         };
         ngFoobarEl.bind('click', hide);
 
@@ -68,9 +58,7 @@ angular.module('ngFoobar.provider', ['ngFoobar.directive'])
             ngFoobarEl.children('.message').html(message);
             ngFoobarEl.css({color: Colors[context].color, backgroundColor: Colors[context].background, borderBottom: '1px solid ' + Colors[context].border})
             var self = this;
-            animate(function () {
-              ngFoobarEl.css({opacity: '0.8', width: '100%'});
-            }, 100);
+            ngFoobarEl.css('top', '0');
           },
           configure: function(options) {
             var key, value;
