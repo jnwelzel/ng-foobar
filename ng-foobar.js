@@ -47,30 +47,30 @@ angular.module('ngFoobar.provider', ['ngFoobar.directive'])
           barSelector: '#ng-foobar'
         };
         var ngFoobarEl = $compile('<ng-foobar></ng-foobar>')($scope);
-        var animation;
         $body.append(ngFoobarEl);
+        var animation;
+        var animate = function(fn, time) {
+          if(animation) { $timeout.cancel(animation); }
+          animation = $timeout(fn, time);
+        };
+
+        var hide = function () {
+          ngFoobarEl.css('opacity', '0');
+          var self = this;
+          animate(function () {
+            ngFoobarEl.css('width', '0%');
+          }, 400);
+        };
+        ngFoobarEl.bind('click', hide);
+
         return {
           show: function(context, message) {
             ngFoobarEl.children('.message').html(message);
             ngFoobarEl.css({color: Colors[context].color, backgroundColor: Colors[context].background, borderBottom: '1px solid ' + Colors[context].border})
             var self = this;
-            self.animate(function () {
-              ngFoobarEl.css('opacity', '0.8');
+            animate(function () {
+              ngFoobarEl.css({opacity: '0.8', width: '100%'});
             }, 100);
-          },
-          hide: function () {
-            ngFoobarEl.css('opacity', '0');
-            var self = this;
-            self.animate(function () {
-              progressbarEl.css('width', '0%');
-              self.animate(function () {
-                self.show();
-              }, 500);
-            }, 500);
-          },
-          animate: function(fn, time) {
-            if(animation) { $timeout.cancel(animation); }
-            animation = $timeout(fn, time);
           },
           configure: function(options) {
             var key, value;
