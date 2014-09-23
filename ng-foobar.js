@@ -1,9 +1,9 @@
 /* ngFoobar, (c) 2014 Jonathan Welzel - http://jonwelzel.com/ng-foobar
  * @license MIT */
 
-'use strict';
 angular.module('ngFoobar.provider', ['ngFoobar.directive'])
   .provider('ngFoobar', function () {
+    'use strict';
     this.version = '0.0.1';
 
     this.success = {
@@ -44,7 +44,7 @@ angular.module('ngFoobar.provider', ['ngFoobar.directive'])
         var Settings = this.settings = {
           autoClose: true,
           displayTime: 3,
-          barSelector: '[role="bar"]'
+          barSelector: '#ng-foobar'
         };
         var ngFoobarEl = $compile('<ng-foobar></ng-foobar>')($scope);
         var animation;
@@ -52,19 +52,17 @@ angular.module('ngFoobar.provider', ['ngFoobar.directive'])
         return {
           show: function(context, message) {
             ngFoobarEl.children('.message').html(message);
-            ngFoobarEl.children(Settings.barSelector).css({color: Colors[context].color,
-                                                           backgroundColor: Colors[context].background,
-                                                           borderBottom: '1px solid ' + Colors[context].border})
+            ngFoobarEl.css({color: Colors[context].color, backgroundColor: Colors[context].background, borderBottom: '1px solid ' + Colors[context].border})
             var self = this;
             self.animate(function () {
-              ngFoobarEl.children().css('opacity', '0.95');
+              ngFoobarEl.css('opacity', '0.8');
             }, 100);
           },
           hide: function () {
-            ngFoobarEl.children().css('opacity', '0');
+            ngFoobarEl.css('opacity', '0');
             var self = this;
             self.animate(function () {
-              progressbarEl.children().css('width', '0%');
+              progressbarEl.css('width', '0%');
               self.animate(function () {
                 self.show();
               }, 500);
@@ -93,9 +91,9 @@ angular.module('ngFoobar.directive', [])
       replace: true,
       restrict: 'E',
       link: function ($scope, $element, $attrs) {
-        $element.bind('click', $scope.hide());
+
       },
-      template: '<div class="bar" role="bar"><div class="message"></div></div>'
+      template: '<div id="ng-foobar" class="bar"><div class="message"></div></div>'
     };
 
     return directiveObj;
