@@ -52,7 +52,7 @@ angular.module('ngFoobar.provider', ['ngFoobar.directive'])
         $body.append(ngFoobarEl);
 
         var hide = function () {
-          ngFoobarEl.css('top', '-50px');
+          ngFoobarEl.css('top', '-70px');
         };
         ngFoobarEl.bind('click', hide);
 
