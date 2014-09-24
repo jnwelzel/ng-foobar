@@ -40,6 +40,15 @@ ngFoobar.show("success", "Hi, I'm a successful notification message)";
 ngFoobar.setAutoClose(true, 5);
 ```
 
+* **setColors(context, colors)** - Change the colors of a specific context
+ * **context** - `[string]` `"success"'`, `"error"`, `"warning"` or `"info"`
+ * **colors** - `[object] ` `color`, `background` and `border` - new color values
+```javascript
+ngFoobar.setColors("success", {color: "#3C763D", background: "#DFF0D8", border: "#D6E9C6"});
+```
+
+* **resetColors()** - Resets all colors for all contexts to their default values
+
 #Demo
 A working demo can be found at [http://ng-foobar.herokuapp.com/](http://ng-foobar.herokuapp.com/)
 
