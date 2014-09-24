@@ -41,9 +41,8 @@ angular.module('ngFoobar.provider', ['ngFoobar.directive'])
             $scope = $rootScope,
             $body  = $document.find('body');
         var Settings = this.settings = {
-          autoClose: true,
-          displayTime: 3,
-          barSelector: '#ng-foobar'
+          autoClose: false,
+          displayTime: 3
         };
         var ngFoobarEl = $compile('<ng-foobar></ng-foobar>')($scope);
         $body.append(ngFoobarEl);
@@ -59,6 +58,11 @@ angular.module('ngFoobar.provider', ['ngFoobar.directive'])
             ngFoobarEl.css({color: Colors[context].color, backgroundColor: Colors[context].background, borderBottom: '1px solid ' + Colors[context].border})
             var self = this;
             ngFoobarEl.css('top', '0');
+            if (Settings.autoClose) {
+              $timeout(function(){
+                hide();
+              }, Settings.displayTime * 1000);
+            }
           },
           configure: function(options) {
             var key, value;
@@ -67,6 +71,10 @@ angular.module('ngFoobar.provider', ['ngFoobar.directive'])
               if (value !== undefined && options.hasOwnProperty(key)) Settings[key] = value;
             }
             return this;
+          },
+          setAutoClose: function(autoClose, displayTime) {
+            Settings.autoClose = autoClose;
+            Settings.displayTime = displayTime;
           }
         };
       }
