@@ -5,45 +5,49 @@ angular.module('ngFoobar.provider', ['ngFoobar.directive'])
   .provider('ngFoobar', function () {
     'use strict';
 
-    this.success = {
+    this.successColors = {
       color: '#3C763D',
       background: '#DFF0D8',
       border: '#D6E9C6'
     };
 
-    this.warning = {
+    this.warningColors = {
       color: '#C09853',
       background: '#FCF8E3',
       border: '#FBEED5'
     };
 
-    this.info = {
+    this.infoColors = {
       color: '#1E90FF',
       background: '#FFF',
       border: '#EBEBEB'
     };
 
-    this.error = {
+    this.errorColors = {
       color: '#B94A48',
       background: '#F2DEDE',
       border: '#EED3D7'
     };
 
     this.colors = [];
-    this.colors['success'] = this.success;
-    this.colors['warning'] = this.warning;
-    this.colors['info'] = this.info;
-    this.colors['error'] = this.error;
+    this.colors['success'] = this.successColors;
+    this.colors['warning'] = this.warningColors;
+    this.colors['info'] = this.infoColors;
+    this.colors['error'] = this.errorColors;
 
     this.$get = ['$document', '$window', '$compile', '$rootScope', '$timeout',
       function ($document, $window, $compile, $rootScope, $timeout) {
         var Colors = this.colors,
             $scope = $rootScope,
-            $body  = $document.find('body');
-        var Settings = this.settings = {
-          autoClose: false,
-          displayTime: 3
-        };
+            $body  = $document.find('body'),
+            SuccessColors = this.successColors,
+            InfoColors = this.infoColors,
+            WarningColors = this.warningColors,
+            ErrorColors = this.errorColors,
+            Settings = {
+              autoClose: false,
+              displayTime: 3
+            };
         var ngFoobarEl = $compile('<ng-foobar></ng-foobar>')($scope);
         $body.append(ngFoobarEl);
 
@@ -76,8 +80,14 @@ angular.module('ngFoobar.provider', ['ngFoobar.directive'])
             Settings.autoClose = autoClose;
             Settings.displayTime = displayTime;
           },
-          setColors: function(context, options) {
-            Colors[context] = options;
+          setColors: function(context, colors) {
+            Colors[context] = colors;
+          },
+          resetColors: function() {
+            Colors['success'] = SuccessColors;
+            Colors['warning'] = WarningColors;
+            Colors['info'] = InfoColors;
+            Colors['error'] = ErrorColors;
           }
         };
       }
