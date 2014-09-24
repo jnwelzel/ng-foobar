@@ -75,6 +75,9 @@ angular.module('ngFoobar.provider', ['ngFoobar.directive'])
           setAutoClose: function(autoClose, displayTime) {
             Settings.autoClose = autoClose;
             Settings.displayTime = displayTime;
+          },
+          setColors: function(context, options) {
+            Colors[context] = options;
           }
         };
       }
