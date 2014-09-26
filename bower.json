@@ -4,11 +4,12 @@
   "authors": [
     "Jonathan Welzel <jnwelzel@gmail.com>"
   ],
-  "description": "Notification bar that slides down.",
+  "description": "Slide down notification bar for AngularJS",
   "keywords": [
     "notifications",
     "flash",
-    "message"
+    "message",
+    "angularjs"
   ],
   "license": "MIT",
   "main": ["ng-foobar.js", "ng-foobar.css"],
