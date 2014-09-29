@@ -13,7 +13,7 @@
   ],
   "license": "MIT",
   "main": ["ng-foobar.js", "ng-foobar.css"],
-  "homepage": "ng-foobar.herokuapp.com",
+  "homepage": "http://ng-foobar.herokuapp.com",
   "scripts": [
     "ng-foobar.js"
   ],
