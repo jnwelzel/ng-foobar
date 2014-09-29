@@ -48,6 +48,15 @@ ngFoobar.setColors("success", {color: "#3C763D", background: "#DFF0D8", border: 
 ```
 
 * **resetColors()** - Resets all colors for all contexts to their default values
+```javascript
+ngFoobar.resetColors();
+```
+
+* **setOpacity(opacity)** - change the opacity to the specified value
+ * **opacity** - `[number]` The desired opacity value for the notification bar (default is `0.9`)
+```javascript
+ngFoobar.setOpacity(0.8);
+```
 
 #Demo
 A working demo can be found at [http://ng-foobar.herokuapp.com/](http://ng-foobar.herokuapp.com/)

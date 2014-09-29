@@ -46,7 +46,8 @@ angular.module('ngFoobar.provider', ['ngFoobar.directive'])
             ErrorColors = this.errorColors,
             Settings = {
               autoClose: false,
-              displayTime: 3
+              displayTime: 3,
+              opacity: 0.9
             };
         var ngFoobarEl = $compile('<ng-foobar></ng-foobar>')($scope);
         $body.append(ngFoobarEl);
@@ -61,7 +62,7 @@ angular.module('ngFoobar.provider', ['ngFoobar.directive'])
             ngFoobarEl.children('.message').html(message);
             ngFoobarEl.css({color: Colors[context].color, backgroundColor: Colors[context].background, borderBottom: '1px solid ' + Colors[context].border})
             var self = this;
-            ngFoobarEl.css('top', '0');
+            ngFoobarEl.css({top: 0, opacity: Settings.opacity});
             if (Settings.autoClose) {
               $timeout(function(){
                 hide();
@@ -88,6 +89,9 @@ angular.module('ngFoobar.provider', ['ngFoobar.directive'])
             Colors['warning'] = WarningColors;
             Colors['info'] = InfoColors;
             Colors['error'] = ErrorColors;
+          },
+          setOpacity: function(opacity) {
+            Settings.opacity = opacity;
           }
         };
       }
