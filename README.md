@@ -30,7 +30,7 @@ Use with the API down below.
  * **context** - `[string]` `"success"'`, `"error"`, `"warning"` or `"info"`
  * **message** - `[string]` The message to be displayed 
 ```javascript
-ngFoobar.show("success", "Hi, I'm a successful notification message)";
+ngFoobar.show("success", "Hi, I'm a successful notification message");
 ```
 
 * **setAutoClose(autoClose, displayTime)** - Enable/disable notification auto close
