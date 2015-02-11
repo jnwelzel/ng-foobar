@@ -28,6 +28,9 @@ angular.module('ngFoobar.provider', ['ngFoobar.directive'])
       background: '#F2DEDE',
       border: '#EED3D7'
     };
+    
+    this.displayTime = 3000;
+    this.autoClose = false;
 
     this.colors = [];
     this.colors['success'] = this.successColors;
@@ -45,28 +48,28 @@ angular.module('ngFoobar.provider', ['ngFoobar.directive'])
             WarningColors = this.warningColors,
             ErrorColors = this.errorColors,
             Settings = {
-              autoClose: false,
-              displayTime: 3,
+              autoClose: this.autoClose,
+              displayTime: this.displayTime,
               opacity: 0.9
             };
         var ngFoobarEl = $compile('<ng-foobar></ng-foobar>')($scope);
         $body.append(ngFoobarEl);
 
         var hide = function () {
-          ngFoobarEl.css('top', '-70px');
+          ngFoobarEl.css('top', '-200px');
         };
         ngFoobarEl.bind('click', hide);
 
         return {
           show: function(context, message) {
-            ngFoobarEl.children('.message').html(message);
+            ngFoobarEl.children('.ng-foobar-message').html(message);
             ngFoobarEl.css({color: Colors[context].color, backgroundColor: Colors[context].background, borderBottom: '1px solid ' + Colors[context].border})
             var self = this;
             ngFoobarEl.css({top: 0, opacity: Settings.opacity});
             if (Settings.autoClose) {
               $timeout(function(){
                 hide();
-              }, Settings.displayTime * 1000);
+              }, Settings.displayTime);
             }
           },
           configure: function(options) {
@@ -106,7 +109,7 @@ angular.module('ngFoobar.directive', [])
       link: function ($scope, $element, $attrs) {
 
       },
-      template: '<div id="ng-foobar" class="bar"><div class="message"></div></div>'
+      template: '<div id="ng-foobar" class="bar"><div class="ng-foobar-message"></div></div>'
     };
 
     return directiveObj;

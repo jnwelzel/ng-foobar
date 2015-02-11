@@ -35,7 +35,7 @@ ngFoobar.show("success", "Hi, I'm a successful notification message");
 
 * **setAutoClose(autoClose, displayTime)** - Enable/disable notification auto close
  * **autoClose** - `[boolean]` Whether to auto close the notifications or not (default value is `false`)
- * **displayTime** - `[number]` The display duration in seconds (default value is `3`)
+ * **displayTime** - `[number]` The display duration in milliseconds (default value is `3000`)
 ```javascript
 ngFoobar.setAutoClose(true, 5);
 ```
