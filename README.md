@@ -1,9 +1,9 @@
-#Installation
+# Installation
 ```bash
 $ bower install ng-foobar --save
 ```
 
-#Usage
+# Usage
 1. Include both **ng-foobar.js** and **ng-foobar.css** in your website.
 
 ```html
@@ -25,7 +25,7 @@ var MyCtrl = function($scope, $timeout, ngFoobar) {}
 
 Use with the API down below.
 
-#API
+# API
 * **show(context, message)** - Display message in the screen
  * **context** - `[string]` `"success"'`, `"error"`, `"warning"` or `"info"`
  * **message** - `[string]` The message to be displayed 
@@ -58,8 +58,8 @@ ngFoobar.resetColors();
 ngFoobar.setOpacity(0.8);
 ```
 
-#Demo
+# Demo
 A working demo can be found at [http://ng-foobar.herokuapp.com/](http://ng-foobar.herokuapp.com/)
 
-#License
+# License
 MIT
